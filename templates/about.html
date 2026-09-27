@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About | MetriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>⚖</span>
+        MetriCheck
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/scan">Scan</a>
+        <a href="/report">Report</a>
+        <a href="/history">History</a>
+        <a class="active" href="/about">About</a>
+
+    </div>
+
+</nav>
+
+
+<main class="about-page">
+
+    <div class="about-hero">
+
+        <div class="badge">
+            SIH26034
+        </div>
+
+        <h1>
+            Packaged Commodity
+            Compliance Checker
+        </h1>
+
+        <p>
+            AI-assisted image and label analysis for
+            preliminary packaged commodity compliance
+            assessment.
+        </p>
+
+    </div>
+
+
+    <div class="about-grid">
+
+        <section class="report-card">
+
+            <h2>
+                The Problem
+            </h2>
+
+            <p>
+                Inspecting large numbers of packaged
+                commodities manually can be time-consuming
+                and resource-intensive.
+            </p>
+
+        </section>
+
+
+        <section class="report-card">
+
+            <h2>
+                Our Approach
+            </h2>
+
+            <p>
+                The system combines image processing,
+                OCR, information extraction, rule-based
+                validation and visual analysis.
+            </p>
+
+        </section>
+
+
+        <section class="report-card">
+
+            <h2>
+                Workflow
+            </h2>
+
+            <p>
+                Scan → Extract → Validate → Analyse →
+                Report
+            </p>
+
+        </section>
+
+
+        <section class="report-card">
+
+            <h2>
+                Technology
+            </h2>
+
+            <p>
+                Python, Flask, EasyOCR, OpenCV,
+                JavaScript, HTML, CSS and SQLite.
+            </p>
+
+        </section>
+
+    </div>
+
+</main>
+
+</body>
+</html>

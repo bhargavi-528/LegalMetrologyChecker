@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Compliance Report | MetriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>⚖</span>
+        MetriCheck
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/scan">Scan</a>
+        <a class="active" href="/report">Report</a>
+        <a href="/history">History</a>
+
+    </div>
+
+</nav>
+
+
+<main class="report-page">
+
+{% if result %}
+
+
+<div class="report-header">
+
+    <div>
+
+        <small>INSPECTION REPORT</small>
+
+        <h1>
+            Compliance Assessment
+        </h1>
+
+        <p>
+            Preliminary AI-assisted package label assessment
+        </p>
+
+    </div>
+
+
+    <a href="/scan"
+       class="primary-btn">
+
+        + New Scan
+
+    </a>
+
+</div>
+
+
+<div class="summary-grid">
+
+    <div class="summary-card">
+
+        <small>OVERALL STATUS</small>
+
+        <h2>
+            {{ result.compliance.overall }}
+        </h2>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <small>CHECK SCORE</small>
+
+        <h2>
+            {{ result.compliance.score }}%
+        </h2>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <small>PRESENT</small>
+
+        <h2>
+            {{ result.compliance.present }}
+        </h2>
+
+    </div>
+
+
+    <div class="summary-card">
+
+        <small>VERIFY</small>
+
+        <h2>
+            {{ result.compliance.verify }}
+        </h2>
+
+    </div>
+
+</div>
+
+
+<div class="report-grid">
+
+
+    <section class="report-card">
+
+        <div class="card-title">
+
+            <h2>
+                Product Information
+            </h2>
+
+        </div>
+
+
+        {% for key, value in result.product.items() %}
+
+        <div class="field-row">
+
+            <span>
+                {{ key.replace("_", " ").title() }}
+            </span>
+
+            <strong>
+                {% if value %}
+                    {{ value }}
+                {% else %}
+                    Needs verification
+                {% endif %}
+            </strong>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+
+    <section class="report-card">
+
+        <div class="card-title">
+
+            <h2>
+                Package Analysis
+            </h2>
+
+        </div>
+
+
+        <div class="visual-result">
+
+            <div>
+
+                <span>Dominant Colour</span>
+
+                <strong>
+                    {{ result.visual.color }}
+                </strong>
+
+            </div>
+
+
+            <div>
+
+                <span>Detected Shape</span>
+
+                <strong>
+                    {{ result.visual.shape }}
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+</div>
+
+
+<section class="report-card">
+
+    <div class="card-title">
+
+        <div>
+
+            <small>RULE ENGINE</small>
+
+            <h2>
+                Declaration Assessment
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="table-wrapper">
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>Requirement</th>
+                    <th>Status</th>
+                    <th>Detected Value</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+            {% for item in result.compliance.rules %}
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            {{ item.label }}
+                        </strong>
+
+                        <small>
+                            {{ item.description }}
+                        </small>
+
+                    </td>
+
+
+                    <td>
+
+                        <span class="status-badge
+                        {% if item.status == 'PRESENT' %}
+                            present
+                        {% else %}
+                            verify
+                        {% endif %}">
+
+                            {{ item.status }}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {% if item.value %}
+
+                            {{ item.value }}
+
+                        {% else %}
+
+                            —
+
+                        {% endif %}
+
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<section class="report-card">
+
+    <div class="card-title">
+
+        <h2>
+            OCR Evidence
+        </h2>
+
+        <span>
+            Confidence:
+            {{ (result.ocr.confidence * 100)|round(1) }}%
+        </span>
+
+    </div>
+
+
+    <div class="ocr-box">
+
+        {{ result.ocr.text }}
+
+    </div>
+
+</section>
+
+
+<div class="disclaimer">
+
+    <strong>Important:</strong>
+
+    This system provides an automated preliminary
+    assessment for demonstration and review purposes.
+    It does not constitute legal certification or replace
+    verification by an authorised authority.
+
+</div>
+
+
+{% else %}
+
+
+<div class="empty-report">
+
+    <div>
+        📋
+    </div>
+
+    <h1>
+        No report available
+    </h1>
+
+    <p>
+        Scan a packaged product first to generate
+        a compliance assessment.
+    </p>
+
+    <a href="/scan"
+       class="primary-btn">
+
+        Start Scan
+
+    </a>
+
+</div>
+
+
+{% endif %}
+
+</main>
+
+</body>
+</html>

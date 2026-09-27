@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Scan Product | MetriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>⚖</span>
+        MetriCheck
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a class="active" href="/scan">Scan</a>
+        <a href="/report">Report</a>
+        <a href="/history">History</a>
+
+    </div>
+
+</nav>
+
+
+<main class="scan-page">
+
+    <div class="page-heading">
+
+        <small>ACTIVE ROLE</small>
+
+        <h1>
+            {{ role }}
+        </h1>
+
+        <p>
+            Capture or upload the package label for analysis.
+        </p>
+
+    </div>
+
+
+    <div class="scanner-layout">
+
+
+        <section class="camera-card">
+
+            <div class="camera-header">
+
+                <div>
+                    <small>LIVE SCANNER</small>
+                    <h2>Capture Product Label</h2>
+                </div>
+
+                <span id="cameraStatus"
+                      class="status-dot">
+                    Ready
+                </span>
+
+            </div>
+
+
+            <div class="camera-container">
+
+                <video id="camera"
+                       autoplay
+                       playsinline>
+                </video>
+
+                <div class="scan-frame">
+
+                    <div class="corner top-left"></div>
+                    <div class="corner top-right"></div>
+                    <div class="corner bottom-left"></div>
+                    <div class="corner bottom-right"></div>
+
+                    <div class="scan-line"></div>
+
+                </div>
+
+                <div id="cameraPlaceholder"
+                     class="camera-placeholder">
+
+                    <div>📷</div>
+
+                    <p>
+                        Camera preview will appear here
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="camera-controls">
+
+                <button id="startCamera"
+                        class="secondary-btn">
+
+                    📷 Start Camera
+
+                </button>
+
+
+                <button id="torchButton"
+                        class="secondary-btn"
+                        disabled>
+
+                    🔦 Torch
+
+                </button>
+
+
+                <button id="captureButton"
+                        class="capture-btn"
+                        disabled>
+
+                    ● Capture
+
+                </button>
+
+
+                <button id="switchCamera"
+                        class="secondary-btn"
+                        disabled>
+
+                    🔄
+
+                </button>
+
+            </div>
+
+
+            <input
+                type="file"
+                id="imageUpload"
+                accept="image/*"
+                hidden
+            >
+
+            <button id="uploadButton"
+                    class="upload-btn">
+
+                📁 Upload Image Instead
+
+            </button>
+
+
+            <canvas id="canvas"
+                    hidden>
+            </canvas>
+
+        </section>
+
+
+        <section class="info-card">
+
+            <div class="info-icon">
+                ✦
+            </div>
+
+            <h2>
+                What happens next?
+            </h2>
+
+            <div class="step">
+
+                <strong>01</strong>
+
+                <div>
+                    <b>Image Processing</b>
+                    <p>
+                        The image is enhanced for text detection.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <strong>02</strong>
+
+                <div>
+                    <b>OCR Extraction</b>
+                    <p>
+                        Package text is extracted automatically.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <strong>03</strong>
+
+                <div>
+                    <b>Rule Analysis</b>
+                    <p>
+                        Extracted declarations are checked
+                        against configured rules.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <strong>04</strong>
+
+                <div>
+                    <b>Visual Analysis</b>
+                    <p>
+                        Package colour and shape are analysed.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="step">
+
+                <strong>05</strong>
+
+                <div>
+                    <b>Compliance Report</b>
+                    <p>
+                        Results and evidence are displayed
+                        in a structured report.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <div id="processing"
+         class="processing"
+         hidden>
+
+        <div class="loader"></div>
+
+        <h3>
+            Analysing package...
+        </h3>
+
+        <p>
+            OCR and compliance checks are running.
+        </p>
+
+    </div>
+
+
+    <div id="errorBox"
+         class="error-box"
+         hidden>
+    </div>
+
+</main>
+
+
+<script src="{{ url_for('static', filename='js/camera.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/scan.js') }}"></script>
+
+</body>
+</html>

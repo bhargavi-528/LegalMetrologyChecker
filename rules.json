@@ -1,0 +1,60 @@
+{
+    "rules": [
+        {
+            "id": "R001",
+            "field": "product_name",
+            "label": "Product Name",
+            "required": true,
+            "description": "Product identification should be present on the package."
+        },
+        {
+            "id": "R002",
+            "field": "net_quantity",
+            "label": "Net Quantity",
+            "required": true,
+            "description": "Net quantity declaration should be present."
+        },
+        {
+            "id": "R003",
+            "field": "mrp",
+            "label": "MRP",
+            "required": true,
+            "description": "Maximum Retail Price declaration should be present."
+        },
+        {
+            "id": "R004",
+            "field": "manufacturer",
+            "label": "Manufacturer / Packer",
+            "required": true,
+            "description": "Manufacturer or packer information should be present."
+        },
+        {
+            "id": "R005",
+            "field": "country_of_origin",
+            "label": "Country of Origin",
+            "required": true,
+            "description": "Country of origin information should be available where applicable."
+        },
+        {
+            "id": "R006",
+            "field": "date_information",
+            "label": "Date Information",
+            "required": true,
+            "description": "Relevant manufacturing, packing, best-before or use-by information should be available where applicable."
+        },
+        {
+            "id": "R007",
+            "field": "consumer_care",
+            "label": "Consumer Care",
+            "required": true,
+            "description": "Consumer care contact information should be available."
+        },
+        {
+            "id": "R008",
+            "field": "batch_lot",
+            "label": "Batch / Lot",
+            "required": true,
+            "description": "Batch or lot identification should be available where applicable."
+        }
+    ]
+}

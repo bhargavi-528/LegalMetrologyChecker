@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>History | MetriCheck</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        <span>⚖</span>
+        MetriCheck
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">Home</a>
+        <a href="/scan">Scan</a>
+        <a href="/report">Report</a>
+        <a class="active" href="/history">History</a>
+
+    </div>
+
+</nav>
+
+
+<main class="history-page">
+
+    <div class="page-heading">
+
+        <small>INSPECTION DATABASE</small>
+
+        <h1>
+            Scan History
+        </h1>
+
+        <p>
+            Previous package assessments recorded by the system.
+        </p>
+
+    </div>
+
+
+    <section class="report-card">
+
+        {% if records %}
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+
+                        <th>Date</th>
+                        <th>Role</th>
+                        <th>Product</th>
+                        <th>Score</th>
+                        <th>Status</th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for record in records %}
+
+                    <tr>
+
+                        <td>
+                            {{ record["created_at"] }}
+                        </td>
+
+                        <td>
+                            {{ record["role"] }}
+                        </td>
+
+                        <td>
+                            {{ record["product_name"] }}
+                        </td>
+
+                        <td>
+                            {{ record["score"] }}%
+                        </td>
+
+                        <td>
+
+                            <span class="status-badge verify">
+
+                                {{ record["status"] }}
+
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+        <div class="empty-report">
+
+            <div>📂</div>
+
+            <h2>No inspections yet</h2>
+
+            <p>
+                Your scanned products will appear here.
+            </p>
+
+            <a href="/scan"
+               class="primary-btn">
+
+                Scan First Product
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+</body>
+</html>
